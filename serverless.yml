@@ -1,0 +1,21 @@
+service: springboot-lambda
+
+provider:
+  name: aws
+  runtime: java8
+  stage: prod
+  region: eu-west-1
+  memorySize: 192
+  timeout: 60
+
+package:
+  artifact: target/aws-lambda-spring-boot-0.0.1-SNAPSHOT-aws.jar
+
+functions:
+  users:
+    handler: com.naughtyzombie.aws.handler.AwsLambdaFunctionHandler
+    events:
+      - http:
+          path: uppercase
+          method: post
+          cors: true
